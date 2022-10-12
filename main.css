@@ -1,0 +1,7 @@
+body {
+  background-color: white;
+}
+#animals {
+  display: flex;
+  flex-wrap: wrap;
+}
