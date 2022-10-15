@@ -241,15 +241,93 @@ const pets = [
     }
   ];
 
-for (let i=0; i<pets.length; i++) {
-  const animals = document.querySelector("#animals");
-  animals.innerHTML += `<div class="card" style="width: 18rem;">
-  <img src="${pets[i].imageUrl}" class="card-img-top" alt="...">
-  <div class="card-body">
-    <h5 class="card-title">${pets[i].name}</h5>
-    <p class="card-text color">${pets[i].color}</p>
-    <p class="card-text specialSkill">${pets[i].specialSkill}</p>
-    <p class="card-text type">${pets[i].type}</p>
-  </div>
-</div>`
+  for (let i=0; i<pets.length; i++) {
+    const animals = document.querySelector("#animals");
+    animals.innerHTML += `<div class="card" style="width: 18rem;">
+    <img src="${pets[i].imageUrl}" class="card-img-top" alt="...">
+    <div class="card-body">
+      <h5 class="card-title">${pets[i].name}</h5>
+      <p class="card-text color">${pets[i].color}</p>
+      <p class="card-text specialSkill">${pets[i].specialSkill}</p>
+      <p class="card-text type">${pets[i].type}</p>
+    </div>
+  </div>`
+  }
+
+/* const animalCards = (array) => {  
+  for (let i=0; i<pets.length; i++) {
+    const animals = document.querySelector("#animals");
+    animals.innerHTML += `<div class="card" style="width: 18rem;">
+    <img src="${pets[i].imageUrl}" class="card-img-top" alt="...">
+    <div class="card-body">
+      <h5 class="card-title">${pets[i].name}</h5>
+      <p class="card-text color">${pets[i].color}</p>
+      <p class="card-text specialSkill">${pets[i].specialSkill}</p>
+      <p class="card-text type">${pets[i].type}</p>
+    </div>
+  </div>`
+  }
+} */
+
+const renderToDom = (divId, htmlToRender) => {
+  const selectedDiv = document.querySelector(divId);
+  selectedDiv.innerHTML = htmlToRender;
+};
+
+// get the cards on the DOM
+const cardsOnDom = (array) => {
+  let domString = "";
+  for (const pets of array) {
+    domString += `<div class="card" style="width: 18rem;">
+    <img src="${pets.imageUrl}" class="card-img-top" alt="...">
+    <div class="card-body">
+      <h5 class="card-title">${pets.name}</h5>
+      <p class="card-text color">${pets.color}</p>
+      <p class="card-text specialSkill">${pets.specialSkill}</p>
+      <p class="card-text type">${pets.type}</p>
+    </div>
+  </div>`
+    }
+
+  renderToDom("#animals", domString);
 }
+
+const filter = (array, animalType) => {
+  const typeArray = [];
+  for (const member of array) {
+    if (member.type === animalType) {
+      typeArray.push(member);
+    }
+  }
+
+  return typeArray;
+}
+
+const showAllButton = document.querySelector("#allpetsbutton");
+const showDogsButton = document.querySelector("#dogbutton");
+const showCatsButton = document.querySelector("#catbutton");
+const showDinosButton = document.querySelector("#dinobutton");
+
+
+showAllButton.addEventListener('click', () => {
+  console.log("this button clicks");
+  cardsOnDom(pets);
+}); 
+
+showDogsButton.addEventListener('click', () => {
+  console.log("this button clicks");
+  const dogType = filter(pets, 'dog');
+  cardsOnDom(dogType);
+});
+
+showCatsButton.addEventListener('click', () => {
+  console.log("this button clicks");
+  const catType = filter(pets, 'cat');
+  cardsOnDom(catType);
+});
+
+showDinosButton.addEventListener('click', () => {
+  console.log("this button clicks");
+  const dinoType = filter(pets, 'dino');
+  cardsOnDom(dinoType);
+});

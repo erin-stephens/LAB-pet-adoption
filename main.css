@@ -1,6 +1,11 @@
 body {
   background-color: white;
 }
+.buttons {
+  display: flex;
+  justify-content: space-around;
+  align-items: flex-start;
+}
 #animals {
   display: flex;
   flex-wrap: wrap;
