@@ -331,3 +331,25 @@ showDinosButton.addEventListener('click', () => {
   const dinoType = filter(pets, 'dino');
   cardsOnDom(dinoType);
 });
+
+
+const form = document.querySelector('form');
+
+const createAnimal = (event) => {
+  event.preventDefault(); 
+
+  const newAnimalObj = {
+    id: pets.length + 1,
+    name: document.querySelector("#name").value,
+    color: document.querySelector("#color").value,
+    specialSkill: document.querySelector("#specialSkill").value,
+    type: document.querySelector("#type").value,
+    imageUrl: document.querySelector("#image").value
+  }
+
+  pets.push(newAnimalObj);
+  cardsOnDom(pets);
+  form.reset();
+}
+
+form.addEventListener('submit', createAnimal);
