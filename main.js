@@ -250,6 +250,7 @@ const pets = [
       <p class="card-text color">${pets[i].color}</p>
       <p class="card-text specialSkill">${pets[i].specialSkill}</p>
       <p class="card-text type">${pets[i].type}</p>
+      <button class="btn btn-danger" id="delete--${pets.id}">Delete</button>
     </div>
   </div>`
   }
@@ -285,6 +286,7 @@ const cardsOnDom = (array) => {
       <p class="card-text color">${pets.color}</p>
       <p class="card-text specialSkill">${pets.specialSkill}</p>
       <p class="card-text type">${pets.type}</p>
+      <button class="btn btn-danger" id="delete--${pets.id}">Delete</button>
     </div>
   </div>`
     }
@@ -353,3 +355,20 @@ const createAnimal = (event) => {
 }
 
 form.addEventListener('submit', createAnimal);
+
+const animals = document.querySelector("#animals");
+
+animals.addEventListener('click', (e) => {
+  if (e.target.id.includes("delete")) {
+    const [, id] = e.target.id.split("--");
+    const index = pets.findIndex(e => e.id === Number(id));
+    pets.splice(index, 1);
+    cardsOnDom(pets);
+  }
+});
+
+const startAnimals = () => {
+  cardsOnDom(pets);
+}
+
+startAnimals();
